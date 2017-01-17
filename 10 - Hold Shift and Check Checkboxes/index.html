@@ -65,45 +65,75 @@
 
   -->
   <div class="inbox">
-    <div class="item">
+    <label class="item">
       <input type="checkbox">
       <p>This is an inbox layout.</p>
-    </div>
-    <div class="item">
+    </label>
+    <label class="item">
       <input type="checkbox">
       <p>Check one item</p>
-    </div>
-    <div class="item">
+    </label>
+    <label class="item">
       <input type="checkbox">
       <p>Hold down your Shift key</p>
-    </div>
-    <div class="item">
+    </label>
+    <label class="item">
       <input type="checkbox">
       <p>Check a lower item</p>
-    </div>
-    <div class="item">
+    </label>
+    <label class="item">
       <input type="checkbox">
       <p>Everything inbetween should also be set to checked</p>
-    </div>
-    <div class="item">
+    </label>
+    <label class="item">
       <input type="checkbox">
       <p>Try do it with out any libraries</p>
-    </div>
-    <div class="item">
+    </label>
+    <label class="item">
       <input type="checkbox">
       <p>Just regular JavaScript</p>
-    </div>
-    <div class="item">
+    </label>
+    <label class="item">
       <input type="checkbox">
       <p>Good Luck!</p>
-    </div>
-    <div class="item">
+    </label>
+    <label class="item">
       <input type="checkbox">
       <p>Don't forget to tweet your result!</p>
-    </div>
+    </label>
   </div>
 
 <script>
+  const checkboxes = document.querySelectorAll('input[type=checkbox]');
+  let prev = null;
+  checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
+
+  function handleCheck(event) {
+    if (event.shiftKey && this.checked) {
+      let next = checkboxes.indexOf(this);
+      let start = prev > next ? next : prev;
+      let end = prev < next ? next : prev;
+      checkboxes.slice(start, end).forEach(checkbox => checkbox.checked = true);
+    }
+
+    prev = checkboxes.indexOf(this);
+  }
+
+  function handleCheckWesBos(event) {
+    let inBetween = false;
+    if (event.shiftKey && this.checked) {
+      checkboxes.forEach(checkbox => {
+        if (checkbox === this || checkbox === prev) {
+          inBetween  = !inBetween;
+        }
+
+        if (inBetween) {
+          checkbox.checked = true;
+        }
+      })
+    }
+    prev = this;
+  }
 </script>
 </body>
 </html>
