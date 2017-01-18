@@ -104,7 +104,7 @@
   </div>
 
 <script>
-  const checkboxes = document.querySelectorAll('input[type=checkbox]');
+  const checkboxes = [...document.querySelectorAll('input[type=checkbox]')];
   let prev = null;
   checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
 
