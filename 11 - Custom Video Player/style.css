@@ -30,6 +30,18 @@ body {
   width: 100%;
 }
 
+.player__video::full-screen,
+::-moz-full-screen .player__video,
+.player__video::-moz-full-screen,
+.player__video::-webkit-full-screen {
+  height: 100%;
+  width: 100%;
+}
+
+video::-webkit-media-controls-enclosure {
+  display: none !important;
+}
+
 .player__button {
   background:none;
   border:0;
@@ -55,11 +67,13 @@ body {
   display:flex;
   position: absolute;
   bottom:0;
+  left: 0;
   width: 100%;
   transform: translateY(100%) translateY(-5px);
   transition:all .3s;
   flex-wrap:wrap;
   background:rgba(0,0,0,0.1);
+  z-index: 2147483647;
 }
 
 .player:hover .player__controls {
