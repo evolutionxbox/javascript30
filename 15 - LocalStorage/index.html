@@ -20,8 +20,16 @@
       <li>Loading Tapas...</li>
     </ul>
     <form class="add-items">
-      <input type="text" name="item" placeholder="Item Name" required>
-      <input type="submit" value="+ Add Item">
+      <div>
+        <input type="text" name="item" placeholder="Item Name" required>
+        <input type="submit" value="+ Add Item">
+      </div>
+      <hr>
+      <div>
+        <input type="button" name="clear" value="Clear all">
+        <input type="button" name="check" value="Check all">
+        <input type="button" name="uncheck" value="Uncheck all">
+      </div>
     </form>
   </div>
 
@@ -67,7 +75,28 @@
     populateList(items, itemsList);
   }
 
+  function removeAll () {
+    items.length = 0;
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+  }
+
+  function checkAll () {
+    items.forEach(item => item.done = true);
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+  }
+
+  function uncheckAll () {
+    items.forEach(item => item.done = false);
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+  }
+
   addItems.addEventListener('submit', addItem);
+  addItems.querySelector('[name="clear"]').addEventListener('click', removeAll);
+  addItems.querySelector('[name="check"]').addEventListener('click', checkAll);
+  addItems.querySelector('[name="uncheck"]').addEventListener('click', uncheckAll);
   itemsList.addEventListener('click', toggleDone);
   populateList(items, itemsList);
 
