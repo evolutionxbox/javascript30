@@ -182,6 +182,58 @@
     </li>
 
 <script>
+// My solution
+// const times = [...document.querySelectorAll('[data-time]')];
+// const totalSecs = times.map(item => {
+//   let [mins, secs] = item.dataset.time.split(':');
+//   return (+mins*60) + +secs;
+// }).reduce((a,b) => a + b);
+
+// let seconds = totalSecs;
+// const hours = Math.floor(seconds / 3600);
+// seconds = seconds % 3600;
+// const minutes = Math.floor(seconds / 60);
+// seconds = seconds % 60;
+
+// console.log(hours, minutes, seconds);
+
+// Wes Bos 1st solution
+const timeNodes = [...document.querySelectorAll('[data-time]')];
+
+const seconds = timeNodes
+  .map(node => node.dataset.time)
+  .map(timeCode => {
+    const [mins, secs] = timeCode.split(':').map(parseFloat);
+    return (+mins * 60) + +secs;
+  })
+  .reduce((a,b) => a + b);
+
+  let secondsLeft = seconds;
+  const hours = Math.floor(secondsLeft / 3600);
+  secondsLeft = secondsLeft % 3600;
+  const mins = Math.floor(secondsLeft / 60);
+  secondsLeft = secondsLeft % 60;
+
+  console.log(hours, mins, secondsLeft)
+
+// Wes Bos 2nd solution
+// const timeNodes = [...document.querySelectorAll('[data-time]')];
+
+// const timeLeft = timeNodes
+//   .reduce((total, timeCode) => {
+//     const [mins, secs] = timeCode.dataset.time.split(':').map(parseFloat);
+//     return total + ((mins * 60) + secs);
+//   }, 0);
+
+//   let seconds = timeLeft;
+//   const hours = Math.floor(seconds / 3600);
+//   seconds = seconds % 3600;
+//   const minutes = Math.floor(seconds / 60);
+//   seconds = seconds % 60;
+
+//   console.log(hours, minutes, seconds);
+
+
 </script>
 </body>
 </html>
