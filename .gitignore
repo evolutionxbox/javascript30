@@ -3,3 +3,5 @@ _resources
 node_modules/
 *.log
 haters/
+*.sublime-*
+
